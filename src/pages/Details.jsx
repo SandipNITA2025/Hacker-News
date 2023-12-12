@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-
-const API_BASE_URL = "http://hn.algolia.com/api/v1";
+import { BASE_URL } from "../api/Base_URL";
 
 const Details = () => {
   const params = useParams();
@@ -15,7 +14,7 @@ const Details = () => {
     const fetchPost = async () => {
       try {
         if (id) {
-          const response = await axios.get(`${API_BASE_URL}/items/${id}`);
+          const response = await axios.get(`${BASE_URL}/items/${id}`);
           setPost(response.data);
         }
       } catch (error) {

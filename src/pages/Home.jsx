@@ -4,8 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Search } from "lucide-react";
 import { Loader2 } from "lucide-react";
+import { BASE_URL } from "../api/Base_URL";
 
-const API_BASE_URL = "http://hn.algolia.com/api/v1";
+
 
 const Home = () => {
   const [query, setQuery] = useState("");
@@ -21,7 +22,7 @@ const Home = () => {
         try {
           setLoading(true);
           const response = await axios.get(
-            `${API_BASE_URL}/search?query=${query}`
+            `${BASE_URL}/search?query=${query}`
           );
           setResults(response.data.hits);
           setShowDropdown(true);
@@ -48,7 +49,7 @@ const Home = () => {
     if (query.trim() !== "") {
       try {
         const response = await axios.get(
-          `${API_BASE_URL}/search?query=${query}`
+          `${BASE_URL}/search?query=${query}`
         );
         setAllResults(response.data.hits);
       } catch (error) {
