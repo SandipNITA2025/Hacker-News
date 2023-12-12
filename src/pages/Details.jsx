@@ -70,7 +70,7 @@ const Details = () => {
                       Author : <p> {comment?.author}</p>
                     </div>
                     <div
-                      className="bg-[#303030] p-2 px-4 ml-3 rounded-[.6rem]"
+                      className="bg-[#303030] w-[96%] break-words p-2 px-4 ml-3 rounded-[.6rem] overflow-hidden"
                       key={comment.id}
                       dangerouslySetInnerHTML={{ __html: comment?.text }}
                     />
