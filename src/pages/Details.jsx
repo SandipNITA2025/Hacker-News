@@ -10,6 +10,8 @@ const Details = () => {
   const id = params.id;
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -27,10 +29,32 @@ const Details = () => {
     fetchPost();
   }, [id]);
 
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    const percentage = (scrollPosition / (documentHeight - windowHeight)) * 100;
+    setScrollPercentage(percentage);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="w-full mx-auto flex items-center justify-center">
+    <div className="relative w-full mx-auto flex items-center justify-center">
+      {/* Progress Bar */}
+      <div
+        className="bg-yellow-500 h-1 fixed top-0 left-0"
+        style={{ width: `${scrollPercentage}%` }}
+      />
+
       {loading ? (
-        <div className=" min-h-screen w-full flex items-center justify-center ">
+        <div className="min-h-screen w-full flex items-center justify-center">
           <Loader2 className="animate-spin" />
         </div>
       ) : (
